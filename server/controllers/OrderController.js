@@ -31,6 +31,37 @@ class OrderController{
   		
     });
   }
+
+  destroy(req,res){
+
+    Order.findOne({_id:req.body.id},(err,order)=>{
+    	if(!order){
+    		res.json({"errors":"order not found"});
+    	} else {
+    		Order.remove({_id:req.body.id},(err)=>{
+    			if(err){
+    				console.log(err);
+    			} else {
+    				res.json({order_removed:order});
+    			}
+    		});
+    	}
+    });
+
+  }
+
+  read(req,res){
+
+    Order.findOne({_id:req.params.id},(err,order)=>{
+    	if(!order){
+    		res.json({"errors":"order not found"});
+    	} else {
+    		res.json({order:order});
+    	}
+    })
+
+  }
+
 }
 
 module.exports = new OrderController();

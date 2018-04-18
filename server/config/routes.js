@@ -9,6 +9,8 @@ module.exports = (app)=>{
   app.post("/users/register",UserController.register);
   app.post("/reviews",ReviewController.create);
   app.post("/orders",OrderController.create);
+  app.delete("/orders",OrderController.destroy);
+  app.get("/orders/:id",OrderController.read);
   //app.delete("/reviews/:id",ReviewController.destroy);
   app.post("/restaurants",RestaurantController.create);
   app.delete("/restaurants",RestaurantController.destroy);
