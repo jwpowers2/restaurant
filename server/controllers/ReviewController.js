@@ -33,7 +33,64 @@ class ReviewController{
     });
   }
 
+  destroy(req,res){
 
+  	Review.findOne({_id:req.body.id},(err,review)=>{
+
+  	  User.findOne({_id:review.user},(err,user)=>{
+  		
+  		Restaurant.findOne({_id:review.restaurant},(err,restaurant)=>{
+  			
+  			restaurant.orders = _.reject(restaurant.orders, function(el) { return el._id === req.body.id});
+            user.orders = _.reject(user.orders, function(el) { return el._id === req.body.id});
+
+            Review.remove({_id:review._id},(err)=>{
+
+            	restaurant.save((err)=>{
+
+            		if(err){
+
+            			console.log("error");
+
+            		} else {
+
+            			user.save((err)=>{
+
+            				if(err){
+
+            					console.log("error");
+
+            				} else{
+
+            					res.json({review_deleted:review._id});
+
+            				}
+
+            			});
+            		}
+            	});
+            });
+  		});
+  		
+      });
+    });
+
+
+  }
+
+  read(req,res){
+
+    Review.findOne({_id:req.params.id},(err,review)=>{
+
+    	if(!review){
+    		res.json({"errors":"review not found"});
+    	} else {
+    		res.json({review:review});
+    	}
+
+    });
+
+  }
 /*
   		if(review){
   			res.json({errors:"the user has already reviewed that restaurant"});

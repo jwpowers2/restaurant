@@ -41,7 +41,7 @@ class OrderController{
             		}
             	});
             });
-  		});
+	    });
   		
     });
   }
@@ -57,7 +57,7 @@ class OrderController{
   			restaurant.orders = _.reject(restaurant.orders, function(el) { return el._id === req.body.id});
             user.orders = _.reject(user.orders, function(el) { return el._id === req.body.id});
 
-            Order.remove((err)=>{
+            Order.remove({_id:order._id},(err)=>{
 
             	restaurant.save((err)=>{
 
