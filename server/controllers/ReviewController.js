@@ -93,41 +93,7 @@ class ReviewController{
     });
 
   }
-/*
-  		if(review){
-  			res.json({errors:"the user has already reviewed that restaurant"});
-  		} else {
-  			let newReview = new Review(req.body);
-  			newReview.save((err)=>{
-  				if(err){
-  					res.json({errors:newReview.errors});
-  				} else {
-  					
-  					res.json(newReview);
-  				}
-  			});
-  		}
-  	});
-  }
-  // delete review will be an option on page with review json object so id is present
-  destroy(req,res){
-  	Review.findOne({_id:req.params.id},(err,review)=>{
-  		if(!review){
-  			res.json({errors:"the user has not reviewed that restaurant"});
 
-  		} else {
-            Review.remove({_id:review._id},(err)=>{
-            	if(err){
-            		console.log(err);
-            	} else {
-            		res.json({review_removed:review});
-            	}
-
-            })
-  		}
-  	});
-  }
-  */
 }
 
 module.exports = new ReviewController();

@@ -28,6 +28,23 @@ class RestaurantController{
 
   destroy(req,res){
 
+    Restaurant.findOne({_id:req.body.id},(err,restaurant)=>{
+
+    	if(!restaurant){
+    		res.json({error:"record not found"});
+    	} else {
+
+            Restaurant.remove({_id:restaurant._id},(err)=>{
+              if (err){
+              	res.json({error:"problem removing record"});
+              }	else {
+              	res.json({status:"record removed"});
+              }
+            
+            });
+        }
+    });
+
   }
 
 }
