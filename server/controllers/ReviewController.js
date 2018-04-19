@@ -9,7 +9,8 @@ class ReviewController{
   	User.findOne({_id:req.body.user},(err,user)=>{
         //res.json({"testing":user});
   		
-  		Restaurant.findOne({name:req.body.restaurant},(err,restaurant)=>{
+  		Restaurant.findOne({_id:req.body.restaurant},(err,restaurant)=>{
+           
   			var review = new Review(req.body);
   			review.restaurant = restaurant._id;
   			restaurant.reviews.push(review);
@@ -24,11 +25,14 @@ class ReviewController{
             					console.log("error");
             				} else{
             					res.json({"review_saved":review});
+            					
             				}
             			});
             		}
             	});
+            	
             });
+            
   		});
   		
     });
@@ -88,6 +92,20 @@ class ReviewController{
     		res.json({"errors":"review not found"});
     	} else {
     		res.json({review:review});
+    	}
+
+    });
+
+  }
+
+  all(req,res){
+
+    Review.find({},(err,reviews)=>{
+
+    	if(!reviews){
+    		res.json({"errors":"review not found"});
+    	} else {
+    		res.json({reviews:reviews});
     	}
 
     });

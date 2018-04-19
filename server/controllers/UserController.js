@@ -38,6 +38,30 @@ class UserController{
   	});
   }
 
+  all(req,res){
+  	User.find({},(err,users)=>{
+  		if(!users){
+  			res.json({errors:"no users found"});
+  		} else {
+  			res.json(users);
+  		}
+  	});
+  }
+
+  read(req,res){
+
+    User.findOne({_id:req.params.id},(err,user)=>{
+
+    	if(!user){
+    		res.json({"errors":"user not found"});
+    	} else {
+    		res.json({user:user});
+    	}
+
+    });
+
+  }
+
 }
 
 module.exports = new UserController();
