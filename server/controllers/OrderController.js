@@ -104,6 +104,20 @@ class OrderController{
 
   }
 
+  all(req,res){
+
+    Order.find({},(err,orders)=>{
+
+    	if(!orders){
+    		res.json({"errors":"orders not found"});
+    	} else {
+    		res.json({orders:orders});
+    	}
+
+    });
+
+  }
+
 }
 
 module.exports = new OrderController();

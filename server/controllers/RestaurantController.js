@@ -47,6 +47,34 @@ class RestaurantController{
 
   }
 
+  read(req,res){
+
+    Restaurant.findOne({_id:req.params.id},(err,restaurant)=>{
+
+    	if(!restaurant){
+    		res.json({"errors":"restaurant not found"});
+    	} else {
+    		res.json({restaurant:restaurant});
+    	}
+
+    });
+
+  }
+
+  all(req,res){
+
+    Restaurant.find({},(err,restaurants)=>{
+
+    	if(!restaurants){
+    		res.json({"errors":"restaurants not found"});
+    	} else {
+    		res.json({restaurants:restaurants});
+    	}
+
+    });
+
+  }
+
 }
 
 

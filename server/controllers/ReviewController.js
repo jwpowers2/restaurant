@@ -41,46 +41,70 @@ class ReviewController{
   destroy(req,res){
 
   	Review.findOne({_id:req.body.id},(err,review)=>{
-      //if (err)console.log(err);
-      console.log(review);
+
+      if (!review){
+      	res.json({error:"that review does not exist"});
+      } else {
+     
   	  User.findOne({_id:review.user},(err,user)=>{
   		
-  		Restaurant.findOne({_id:review.restaurant},(err,restaurant)=>{
-  			
-  			restaurant.orders = _.reject(restaurant.orders, function(el) { return el._id === req.body.id});
-            user.orders = _.reject(user.orders, function(el) { return el._id === req.body.id});
+  		if (!user){
+  			console.log("no user");
+  		} else {
+  		  console.log(user.reviews);
+  		  
+  		  user.reviews = _.reject(user.reviews, function(el) {return el == req.body.id});
+  		  console.log(user.reviews);
 
-            Review.remove({_id:review._id},(err)=>{
+  		  user.save((err)=>{
 
-            	restaurant.save((err)=>{
+            if(err){
 
-            		if(err){
+              console.log("error");
 
-            			console.log("error");
+            } else{
 
-            		} else {
+              console.log("review deleted for user");
 
-            			user.save((err)=>{
+            }
 
-            				if(err){
-
-            					console.log("error");
-
-            				} else{
-
-            					res.json({"review_deleted":review});
-
-            				}
-
-            			});
-            		}
-            	});
-            });
-  		});
-  		
+          });
+        }
       });
-    });
+  	  
+  	  Restaurant.findOne({_id:review.restaurant},(err,restaurant)=>{
+  		    
+  		if (!restaurant){
+  		    console.log("no restaurant");
+  		} else {
 
+  			restaurant.reviews = _.reject(restaurant.reviews, function(el) { return el == req.body.id});
+  			//console.log(restaurant.orders);
+            restaurant.save((err)=>{
+
+              if(err){
+
+            	console.log("error");
+
+              } else {
+
+                console.log("review deleted for restaurant");
+              }
+            }); 
+        }
+      });
+      
+      Review.remove({_id:review._id},(err)=>{
+
+        if (err){
+        	console.log("review not deleted");
+        } else {
+        	res.json({review_deleted:review});
+        }
+            
+  	  });
+    }
+    });
 
   }
 
