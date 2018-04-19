@@ -1,6 +1,11 @@
+<app-dashboardnavbar></app-dashboardnavbar>
 <div class="container justify-content-center">
-<h1>user dashboard</h1>
+
 
 <h3>Hello {{user.user.first_name}}</h3>
 {{user | json}}
+<hr>
+{{reviews|json}}
+<hr>
+{{orders|json}}
 </div>

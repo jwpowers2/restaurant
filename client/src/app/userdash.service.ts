@@ -12,4 +12,14 @@ export class UserdashService {
 		this._http.get("/api/users/" + user)
 		.subscribe(data=>cb(data));
 	}
+
+	getreview(id,cb){
+		this._http.get("/api/reviews/" + id)
+		.subscribe(data=>cb(data));
+	}
+
+	getorder(id,cb){
+		this._http.get("/api/orders/" + id)
+		.subscribe(data=>cb(data));
+	}
 }
