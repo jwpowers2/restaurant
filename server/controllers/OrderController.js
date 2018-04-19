@@ -9,7 +9,7 @@ class OrderController{
 
   	User.findOne({_id:req.body.user},(err,user)=>{
   		
-  		Restaurant.findOne({name:req.body.restaurant},(err,restaurant)=>{
+  		Restaurant.findOne({_id:req.body.restaurant},(err,restaurant)=>{
 
   			var order = new Order(req.body);
   			order.restaurant = restaurant._id;
@@ -50,42 +50,67 @@ class OrderController{
 
   	Order.findOne({_id:req.body.id},(err,order)=>{
 
+      if (!order){
+      	res.json({error:"that order does not exist"});
+      } else {
+     
   	  User.findOne({_id:order.user},(err,user)=>{
   		
-  		Restaurant.findOne({_id:order.restaurant},(err,restaurant)=>{
-  			
-  			restaurant.orders = _.reject(restaurant.orders, function(el) { return el._id === req.body.id});
-            user.orders = _.reject(user.orders, function(el) { return el._id === req.body.id});
+  		if (!user){
+  			console.log("no user");
+  		} else {
+  		  console.log(user.orders);
+  		  
+  		  user.orders = _.reject(user.orderss, function(el) {return el == req.body.id});
+  		  console.log(user.orders);
 
-            Order.remove({_id:order._id},(err)=>{
+  		  user.save((err)=>{
 
-            	restaurant.save((err)=>{
+            if(err){
 
-            		if(err){
+              console.log("error");
 
-            			console.log("error");
+            } else{
 
-            		} else {
+              console.log("review deleted for user");
 
-            			user.save((err)=>{
+            }
 
-            				if(err){
-
-            					console.log("error");
-
-            				} else{
-
-            					res.json({order_deleted:req.body.id});
-
-            				}
-
-            			});
-            		}
-            	});
-            });
-  		});
-  		
+          });
+        }
       });
+      Restaurant.findOne({_id:order.restaurant},(err,restaurant)=>{
+  		    
+  		if (!restaurant){
+  		    console.log("no restaurant");
+  		} else {
+
+  			restaurant.orders = _.reject(restaurant.orders, function(el) { return el == req.body.id});
+  			//console.log(restaurant.orders);
+            restaurant.save((err)=>{
+
+              if(err){
+
+            	console.log("error");
+
+              } else {
+
+                console.log("review deleted for restaurant");
+              }
+            }); 
+        }
+      });
+      
+      Order.remove({_id:order._id},(err)=>{
+
+        if (err){
+        	console.log("order not deleted");
+        } else {
+        	res.json({order_deleted:order});
+        }
+            
+  	  });
+    }
     });
 
   }
