@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
 			this.error = data.errors;
 		}else{
 			localStorage.setItem("user",data._id);
-			this.router.navigate(["/home"]);
+			this.router.navigate(["/dashboard"]);
 		}
 	});
   }
