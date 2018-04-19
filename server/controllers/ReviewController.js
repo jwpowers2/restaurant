@@ -108,6 +108,23 @@ class ReviewController{
 
   }
 
+  update(req,res){
+
+    Review.findOne({_id:req.params.id},(err,review)=>{
+
+    	review.text = req.body.text;
+    	
+    	review.save((err)=>{
+    		if(err){
+    			res.json({error:"problem with review update"});
+    		} else {
+    			res.json({review_modified_to:review});
+    		}
+    	});
+    });
+
+  }
+
   read(req,res){
 
     Review.findOne({_id:req.params.id},(err,review)=>{

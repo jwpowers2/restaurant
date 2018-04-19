@@ -47,6 +47,23 @@ class RestaurantController{
 
   }
 
+  update(req,res){
+
+    Restaurant.findOne({_id:req.params.id},(err,restaurant)=>{
+    	restaurant.name = req.body.name;
+    	restaurant.menu = req.body.menu;
+    	restaurant.address = req.body.address;
+    	restaurant.save((err)=>{
+    		if(err){
+    			res.json({error:"problem with restaurant update"});
+    		} else {
+    			res.json({restaurant_modified_to:restaurant});
+    		}
+    	});
+    });
+
+  }
+
   read(req,res){
 
     Restaurant.findOne({_id:req.params.id},(err,restaurant)=>{

@@ -151,3 +151,11 @@ start angular project and call it client
 ng new client --routing
 
 ------------------------------------------------------
+
+# setup angular side of things
+
+create new componenet
+
+ng g c component_name
+
+

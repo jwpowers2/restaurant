@@ -1,0 +1,32 @@
+
+<div class="jumbotron">
+
+<h1>register</h1>
+
+<div class="row justify-content-center">
+
+
+<div class="col-sm-2">
+
+
+<form (submit)="register()">
+	<input class="m-2" type="text" name="user.first_name" [(ngModel)]="user.first_name" placeholder="first name">
+	<input class="m-2" type="text" name="user.last_name" [(ngModel)]="user.last_name" placeholder="last name">
+	<input class="m-2" type="text" name="user.address" [(ngModel)]="user.address" placeholder="address">
+	<input class="m-2" type="text" name="user.phone" [(ngModel)]="user.phone" placeholder="phone number">
+	<input class="m-2" type="text" name="user.email" [(ngModel)]="user.email" placeholder="email">
+	<input class="m-2" type="password" name="user.password" [(ngModel)]="user.password" placeholder="password">
+
+	<input class="m-2" type="submit" value="Register">
+</form>
+</div>
+</div>
+
+<div class="col-sm-4" *ngIf="error">
+	<ul >
+
+	  <li *ngFor="let i of errors">{{i}}</li>
+	</ul>
+{{errors|json}}
+</div>
+</div>

@@ -1,0 +1,29 @@
+
+
+<div class="jumbotron">
+
+<h1>login</h1>
+
+<div class="row justify-content-center">
+
+
+<div class="col-sm-2">
+
+
+<form (submit)="login()">
+	<input class="m-2" type="text" name="loggedIn.email" [(ngModel)]="loggedIn.email" placeholder="email">
+	<input class="m-2" type="password" name="loggedIn.password" [(ngModel)]="loggedIn.password" placeholder="password">
+	<input class="m-2" type="submit" value="Login">
+
+</form>
+</div>
+</div>
+
+<div class="col-sm-4" *ngIf="error">
+	<ul >
+
+	  <li *ngFor="let i of errors">{{i}}</li>
+	</ul>
+{{errors|json}}
+</div>
+</div>

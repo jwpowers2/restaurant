@@ -115,6 +115,23 @@ class OrderController{
 
   }
 
+  update(req,res){
+
+    Order.findOne({_id:req.params.id},(err,order)=>{
+    	order.item = req.body.item;
+    	order.quantity = req.body.quantity;
+    	
+    	order.save((err)=>{
+    		if(err){
+    			res.json({error:"problem with order update"});
+    		} else {
+    			res.json({order_modified_to:order});
+    		}
+    	});
+    });
+
+  }
+
   read(req,res){
 
     Order.findOne({_id:req.params.id},(err,order)=>{

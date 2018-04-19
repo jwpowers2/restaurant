@@ -38,6 +38,28 @@ class UserController{
   	});
   }
 
+  update(req,res){
+
+    User.findOne({_id:req.params.id},(err,user)=>{
+
+    	user.first_name = req.body.first_name;
+    	user.last_name = req.body.last_name;
+    	user.address = req.body.address;
+    	user.phone = req.body.phone;
+    	user.email = req.body.email;
+    	user.password = req.body.password;
+    	
+    	user.save((err)=>{
+    		if(err){
+    			res.json({error:"problem with user update"});
+    		} else {
+    			res.json({user_modified_to:user});
+    		}
+    	});
+    });
+
+  }
+
   all(req,res){
   	User.find({},(err,users)=>{
   		if(!users){
