@@ -1,3 +1,4 @@
+let _ = require("underscore");
 let Review = require("mongoose").model("Review");
 let User = require("mongoose").model("User");
 let Restaurant = require("mongoose").model("Restaurant");
@@ -36,7 +37,8 @@ class ReviewController{
   destroy(req,res){
 
   	Review.findOne({_id:req.body.id},(err,review)=>{
-
+      //if (err)console.log(err);
+      console.log(review);
   	  User.findOne({_id:review.user},(err,user)=>{
   		
   		Restaurant.findOne({_id:review.restaurant},(err,restaurant)=>{
@@ -62,7 +64,7 @@ class ReviewController{
 
             				} else{
 
-            					res.json({review_deleted:review._id});
+            					res.json({"review_deleted":review});
 
             				}
 

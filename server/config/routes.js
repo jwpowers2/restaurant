@@ -8,6 +8,7 @@ module.exports = (app)=>{
   app.post("/users/login",UserController.login);
   app.post("/users/register",UserController.register);
   app.post("/reviews",ReviewController.create);
+  app.delete("/reviews",ReviewController.destroy);
   app.post("/orders",OrderController.create);
   app.delete("/orders",OrderController.destroy);
   app.get("/orders/:id",OrderController.read);
@@ -17,3 +18,4 @@ module.exports = (app)=>{
   //app.put("/tasks/:id",TaskController.mod_task);
 
 }
+
