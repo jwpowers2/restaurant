@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 			console.log(data.errors);
 		}else{
 			localStorage.setItem("user",data._id);
-			this.router.navigate(["/dashboard"]);
+			this.router.navigate(["/dashrev"]);
 		}
 	});
   }

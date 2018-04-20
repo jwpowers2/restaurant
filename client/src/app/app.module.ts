@@ -12,6 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardnavbarComponent } from './dashboardnavbar/dashboardnavbar.component';
+import { DashrevComponent } from './dashrev/dashrev.component';
+import { DashordComponent } from './dashord/dashord.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { DashboardnavbarComponent } from './dashboardnavbar/dashboardnavbar.comp
     RegisterComponent,
     HomeComponent,
     DashboardComponent,
-    DashboardnavbarComponent
+    DashboardnavbarComponent,
+    DashrevComponent,
+    DashordComponent
   ],
   imports: [
     BrowserModule,

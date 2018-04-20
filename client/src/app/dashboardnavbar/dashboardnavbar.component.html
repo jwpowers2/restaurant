@@ -1,16 +1,16 @@
-<div class="navbar-fixed-left">
-  <div class="container-fluid">
+
+<div class="col-md-3 sidebar">
   <button [routerLink]="['home']"><h2>dashboard</h2></button>
   <!-- Links -->
-  <ul class="navbar-nav">
+  <ul class="list-unstyled">
    
-    <li class="nav-item">
-      <button [routerLink]="['login']">reviews</button>
+    <li class="m-5">
+      <button [routerLink]="['/dashrev']">reviews</button>
     </li>
-    <li class="nav-item">
-      <button [routerLink]="['register']">orders</button>
+    <li class="m-5">
+      <button [routerLink]="['/dashord']">orders</button>
     </li>
     
   </ul>
-  </div>
+  
 </div>
